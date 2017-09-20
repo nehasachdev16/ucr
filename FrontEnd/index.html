@@ -35,14 +35,17 @@
   						<i class="fa fa-bell-o fa-2x"></i>   <i class="fa fa-question-circle-o fa-2x"></i>   <i class="fa fa-sign-out fa-2x"></i>
   					</div> 	
   				</div>
-  				
-  				<!-- <div class="container-fluid">
+
+  				 <div class="container-fluid">
   				<div class="panel panel-default">
   					<div class="panel-body">
-  						Neha
+  						<ul class="nav nav-tabs">
+  							 <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
+  						</ul>
+  						<div ng-view></div>
   					</div>
   				</div>
-  			    </div> -->
+  			    </div> 
   			</div>
 
 
