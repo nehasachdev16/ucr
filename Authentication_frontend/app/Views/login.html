@@ -1,0 +1,43 @@
+<div>
+    <div class="heading marginAuto" style="width: 115px;"> Login !</div>
+    <div class="signupForm">
+
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa fa-envelope"> </span>
+                <span> Email: </span>
+            </div>
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.email">
+        </div>
+
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa  fa-unlock-alt"> </span>
+                <span> Password: </span>
+            </div>
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.password" >
+        </div>
+
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa  fa-university"> </span>
+                <span> I am: </span>
+            </div>
+            <label class="col-xs-4"> <input type="radio"  name="userIdentity"> Student </label>
+            <label class="col-xs-4"> <input type="radio"  name="userIdentity"> Professor </label>
+        </div>
+
+    </div>
+
+    <div class="">
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa fa-question"> Forgot credentials</span>
+            </div>
+            <div class="col-xs-5">
+                <label> <input type="checkbox"> Remember me</label>
+            </div>
+            <div class="col-xs-3 btn btn-default" ng-click="submitLoginCredentials()"> Submit </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+.orangeFont{
+    color: #F9B820;
+}
+
+.background{
+    background-color: #830000;
+}
+
+.positionRelative{
+    position: relative;
+}
+
+.positionAbsolute{
+    position: absolute;
+}
+
+.dottedBorder{
+    border: dotted 2px #F9B820;
+}
+
+.heading{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.floatRight{
+    float: right;
+}
+
+.floatLeft{
+    float: left;
+}
+
+.clearBoth{
+    clear: both;
+}
+
+.marginAuto{
+    margin: auto;
+}
