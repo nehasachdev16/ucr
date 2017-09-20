@@ -1,6 +1,3 @@
-var ucr = angular.module("ucr", []);
- 
-
 ucr.controller("maincontroller",["$scope","$http",function($scope,$http){
 
 	console.log("Controller Running");
@@ -14,9 +11,9 @@ ucr.controller("maincontroller",["$scope","$http",function($scope,$http){
 	
 
 	$scope.tabs = [
-      { link : '#/announcement', label : 'Announcements' },
-      { link : '#/courseReview', label : 'Course Reviews' },
-      { link : '#/profHomePage', label : 'Professor Home' }
+      { link : '#!announcement', label : 'Announcements' },
+      { link : '#!courseReview', label : 'Course Reviews' },
+      { link : '#!profHomePage', label : 'Professor Home' }
     ]; 
 
  $scope.selectedTab = $scope.tabs[0];    
