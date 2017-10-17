@@ -24,3 +24,22 @@ nodemon Server.js
 #Checking port running and end tasks(windows)
 netstat -a -o -n
 taskkill /F /PID XXXX
+
+#=========================== GIT commands ====================
+
+git checkout -t new_branch master
+
+git branch -vv
+
+git checkout branch_name
+
+git fetch
+
+git pull
+
+git commit -m "comment for committing file"
+
+git add .
+git reset //reset a add
+
+git rm -r --cached foldername //remove from git, keep it in local copy
