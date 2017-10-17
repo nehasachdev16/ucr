@@ -1,3 +1,5 @@
+(Don't add node_module and package.json to git - They are local folders for the server)
+#================== Initial Server Setup for UCR ================
 npm init
 
 #Install express
@@ -19,6 +21,6 @@ npm install bcrypt-nodejs --save
 npm install -g nodemon
 nodemon Server.js
 
-#Checking port running
+#Checking port running and end tasks(windows)
 netstat -a -o -n
 taskkill /F /PID XXXX
