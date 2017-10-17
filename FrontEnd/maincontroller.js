@@ -11,9 +11,10 @@ ucr.controller("maincontroller",["$scope","$http",function($scope,$http){
 	
 
 	$scope.tabs = [
+	  { link : '#!profHomePage', label : 'Professor Home' },
       { link : '#!announcement', label : 'Announcements' },
-      { link : '#!courseReview', label : 'Course Reviews' },
-      { link : '#!profHomePage', label : 'Professor Home' }
+      { link : '#!courseReview', label : 'Course Reviews' }
+      
     ]; 
 
  $scope.selectedTab = $scope.tabs[0];    

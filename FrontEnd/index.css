@@ -7,3 +7,40 @@
    font-family: sans-serif;
 }
 
+.heading{
+	color: black;
+	margin-top: 1.3em;
+	margin-left: 0.2em;
+	font-size: 1.3em;
+   font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
+
+th {
+    background-color: #870000;
+    color: #FFCC00;
+    font-weight:100;
+}
+#font{
+	margin-right: 1.2em;
+}
+#prof{
+	font-size: 1.2em;
+}
+.TableDiv{
+	overflow-x:auto;
+}
+#FormDisplay{
+	padding-left:38px;
+}
