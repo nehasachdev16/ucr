@@ -1,0 +1,28 @@
+<div class="authenticationHolder row">
+    <div class="orangeFont appHeading background">
+        {{appName}}
+    </div>
+    <div>
+        <div class="col-xs-12 col-sm-7">
+            <div ng-include="'app/views/applicationDescription.html'"></div>
+            <div ng-include="'app/views/CoursesPresent.html'"></div>
+        </div>
+
+        <div class="col-xs-12 col-sm-5 container-fluid loginHolder borderShadow">
+
+            <div ng-show="signIn">
+                <a href="/Login" class="floatRight btn btn-default alreadyHaveButton"> Already have an account! </a>
+                <div class="clearBoth"></div>
+                <div ng-include="'app/views/signup.html'"></div>
+            </div>
+
+            <div ng-hide="signIn">
+                <a href="/Signup" class="floatRight btn btn-default alreadyHaveButton"> Don't have an account? </a>
+                <div class="clearBoth"></div>
+                <div ng-include="'app/views/login.html'"></div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

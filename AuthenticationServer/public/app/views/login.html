@@ -1,0 +1,43 @@
+<div>
+    <div class="heading marginAuto" style="width: 115px;"> Login !</div>
+
+    <form class="signupForm">
+
+        <div class="row show-hide-message textAlignCenter" ng-show="credentialsSuccessful">
+            <div class="alert alert-success"> {{errorMessage}} </div>
+        </div>
+
+        <div class="row show-hide-message textAlignCenter" ng-hide="credentialsError">
+            <div class="alert alert-danger"> {{errorMessage}}</div>
+        </div>
+
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa fa-envelope"> </span>
+                <span> Email: </span>
+            </div>
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.email" placeholder="@usc.edu">
+        </div>
+
+        <div class="signupRow row">
+            <div class="col-xs-4">
+                <span class="fa  fa-unlock-alt"> </span>
+                <span> Password: </span>
+            </div>
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.password" placeholder="***********">
+        </div>
+
+    </form>
+
+    <div class="signupRow row">
+        <div class="col-xs-6">
+            <div class="fontSize10 cursorPointer">
+                <span class="fa fa-question"> Forgot credentials </span>
+            </div>
+            <div class="fontSize10 cursorPointer">
+                <label> <input type="checkbox" style="height: 10px"> Remember me</label>
+            </div>
+        </div>
+        <div class="col-xs-3 pull-right btn btn-default" ng-click="submitLoginCredentials();"> Submit </div>
+    </div>
+</div>

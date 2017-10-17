@@ -1,14 +1,23 @@
 <div>
 
     <div class="heading marginAuto" style="width: 115px;"> Sign up !</div>
-    <div class="signupForm">
+
+    <form class="signupForm" >
+
+        <div class="row show-hide-message textAlignCenter" ng-show="credentialsSuccessful">
+            <div class="alert alert-success"> {{errorMessage}} </div>
+        </div>
+
+        <div class="row show-hide-message textAlignCenter" ng-hide="credentialsError">
+            <div class="alert alert-danger"> {{errorMessage}}</div>
+        </div>
 
         <div class="signupRow row">
             <div class="col-xs-4">
                 <span class="fa fa-user"> </span>
                 <span> Name: </span>
             </div>
-            <input type="text" class="col-xs-8" ng-model="loginCredentials.name">
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.username" placeholder="Username">
         </div>
 
         <div class="signupRow row">
@@ -16,7 +25,7 @@
                 <span class="fa fa-envelope"> </span>
                 <span> Email: </span>
             </div>
-            <input type="text" class="col-xs-8" ng-model="loginCredentials.email">
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.email" placeholder="@usc.edu">
         </div>
 
         <div class="signupRow row">
@@ -24,7 +33,7 @@
                 <span class="fa  fa-unlock-alt"> </span>
                 <span> Password: </span>
             </div>
-            <input type="text" class="col-xs-8" ng-model="loginCredentials.password" >
+            <input type="text" class="col-xs-8" ng-model="loginCredentials.password" placeholder="***********">
         </div>
 
         <div class="signupRow row">
@@ -36,17 +45,18 @@
             <label class="col-xs-4"> <input type="radio"  name="userIdentity" value="professor" ng-model="loginCredentials.identity"> Professor </label>
         </div>
 
-    </div>
+    </form>
 
-    <div class="">
-        <div class="signupRow row">
-            <div class="col-xs-4">
-                <span class="fa fa-question"> Forgot credentials</span>
+    <div class="signupRow row">
+        <div class="col-xs-6">
+            <div class="fontSize10 cursorPointer">
+                <span class="fa fa-question"> Forgot credentials </span>
             </div>
-            <div class="col-xs-5">
-                <label> <input type="checkbox"> Remember me</label>
+            <div class="fontSize10 cursorPointer">
+                <label> <input type="checkbox" style="height: 10px"> Remember me</label>
             </div>
-            <div class="col-xs-3 btn btn-default" ng-click="submitLoginCredentials()"> Submit </div>
         </div>
+        <div class="col-xs-3 pull-right btn btn-default" ng-click="submitSignupCredentials();"> Submit </div>
     </div>
 </div>
+

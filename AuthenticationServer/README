@@ -1,0 +1,24 @@
+npm init
+
+#Install express
+npm install express --save
+npm start Server.js
+
+#Install morgan
+npm install morgan --save
+
+#Install mongoose
+npm install mongoose --save
+
+npm install body-parser --save
+
+#install bcrypt for authentication (not yet required for UCRServer)
+npm install bcrypt-nodejs --save
+
+#Install continuous server change monitoring
+npm install -g nodemon
+nodemon Server.js
+
+#Checking port running
+netstat -a -o -n
+taskkill /F /PID XXXX
