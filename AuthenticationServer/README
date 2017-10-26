@@ -22,7 +22,7 @@ npm install -g nodemon
 nodemon Server.js
 
 #Checking port running and end tasks(windows)
-netstat -a -o -n
+netstat -a -o -n | find <port number>
 taskkill /F /PID XXXX
 
 #=========================== GIT commands ====================
@@ -37,9 +37,17 @@ git fetch
 
 git pull
 
-git commit -m "comment for committing file"
+///
+git init //initialize folder with repository
 
 git add .
 git reset //reset a add
-
 git rm -r --cached foldername //remove from git, keep it in local copy
+git rm --cached filename
+
+git commit -m "comment for committing file"
+
+git log
+
+git remote add remoteBranchName link_where_to_add
+git push remoteBranchName master

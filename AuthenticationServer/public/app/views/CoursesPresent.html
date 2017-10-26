@@ -1,7 +1,7 @@
 <div class="container-fluid dottedBorder coursesPresent">
     <div class="heading"> Available Content </div>
 
-    <ul class="welcomeContent" ng-repeat="(key,value) in availableCourses">
-        <li> {{key}} {{value}}</li>
+    <ul class="welcomeContent" ng-repeat="eachCourse in availableCourses">
+        <li> {{eachCourse.courseId}} : {{eachCourse.courseName}}</li>
     </ul>
 </div>

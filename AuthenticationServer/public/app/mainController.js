@@ -7,13 +7,16 @@ ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendReques
         //-------------- Declaring all scope variables -------------------
 
         $scope.appName = config.appName;
+        $scope.appDescription = config.appDescription;
 
         //Load values from DB
-        $scope.availableCourses = {
-            "CSCI585" : "Database Systems",
-            "CSCI561" : "Foundations of Artificial Intelligence",
-            "CSCI562" : "Foundations of Artificial Intelligence sdkfjsdkfhaskdjfksuddfbbsadjkflks"
-        };
+        var url = config.apiRequestURL + config.ucrServerPort + config.apiGeneral + config.apiAvailableCourses;
+        console.log( url );
+        sendRequest.get( url ).then( function ( data ) {
+            $scope.availableCourses = data.data.data;
+        }, function (err) {
+           console.log( err );
+        });
 
         var path = $location.path();
         $scope.signIn = true;

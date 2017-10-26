@@ -1,14 +1,16 @@
 var ucrLogin = angular.module("ucr",['ngRoute','ngAnimate']);
 
+var description = "is an platform for ...... \n Neha write something good here";
 ucrLogin.constant('config', {
-    appName: 'University Course Review',
-    apiRequestURL: 'http://localhost',
-    apiRequestPort: ':9090',
-    apiGeneral: '/api',
-    ucrServerPort: ':9191',
-    apiSignupUser: '/signup_user',
-    apiLoginUser: '/authenticate_user'
-
+    appName             : 'University Course Review',
+    appDescription      : description,
+    apiRequestURL       : 'http://localhost',
+    apiRequestPort      : ':9090',
+    apiGeneral          : '/api',
+    ucrServerPort       : ':9191',
+    apiSignupUser       : '/signup_user',
+    apiLoginUser        : '/authenticate_user',
+    apiAvailableCourses : '/get_available_courses'
 });
 
 ucrLogin.constant('errorCodes',{

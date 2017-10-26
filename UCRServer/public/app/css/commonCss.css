@@ -1,0 +1,32 @@
+.ucrPageHolder{
+    padding: 0px !important;
+}
+
+.background{
+    background-color: #830000 !important;
+}
+
+.orangeFont{
+    color: #F9B820 !important;
+}
+
+.padding10{
+    padding: 0 10px;
+}
+
+.cursorPointer{
+    cursor: pointer;
+}
+
+.textAlignEnd{
+    text-align: end;
+}
+
+.fontHeader{
+    font-size: 20px !important;
+    font-weight: bold;
+}
+
+.fontBold{
+    font-weight: bold;
+}

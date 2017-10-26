@@ -15,10 +15,10 @@ module.exports = function( router ){
     //Add new user
     router.post('/signup_user',function (req, res) {
         var user = new User();
-        user.username = req.body.username;
-        user.password = req.body.password;
-        user.email = req.body.email;
-        user.identity = req.body.identity;
+        user.username   = req.body.username;
+        user.password   = req.body.password;
+        user.email      = req.body.email;
+        user.identity   = req.body.identity;
         user.save( function (err) {
             if( req.body.username == null || req.body.username == '' ||
                 req.body.password == null || req.body.password == '' ||

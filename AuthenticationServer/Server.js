@@ -32,5 +32,5 @@ app.get('*',function ( req, res) {
 });
 
 app.listen(port, function () {
-    console.log('================ Running UCR Express server on port ' + port +' ================\n');
+    console.log('================ Running UCR Authentication Express server on port ' + port +' ================\n');
 });
