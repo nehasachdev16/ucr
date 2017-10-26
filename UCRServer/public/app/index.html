@@ -43,7 +43,7 @@
             </div>
 
         </div>
-        <div class="panel-body">
+        <div class="panel-body entirePageColor">
             <div class="row">
 
                 <div class="col-sm-4 fontBold" id="prof">Welcome Professor {{ProfName}}!</div>
@@ -58,12 +58,10 @@
 
             <div class="container-fluid ucrPageHolder">
                 <div class="panel panel-default">
-                    <div class="panel-body">
-                        <ul class="nav nav-tabs">
-                            <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
-                        </ul>
-                        <div ng-view></div>
-                    </div>
+                    <ul class="nav nav-tabs">
+                        <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
+                    </ul>
+                    <div class="panel-body" ng-view></div>
                 </div>
             </div>
         </div>

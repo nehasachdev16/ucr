@@ -1,6 +1,9 @@
 .ucrPageHolder{
     padding: 0px !important;
 }
+.entirePageColor{
+    background-color: #F7F7F7;
+}
 
 .background{
     background-color: #830000 !important;
