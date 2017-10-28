@@ -44,3 +44,37 @@ th {
 #FormDisplay{
 	padding-left:38px;
 }
+#SubmitBtn {
+	background-color: #870000;
+	color: #FFCC00;
+    font-weight:100;
+}
+.review{
+	width: 85%;
+    display: inline-block;
+}
+.dropdown{
+	width: 100%; 
+      
+    text-align: right;
+}
+.dropdownCss {
+	background-color: #FFCC00 ;
+	color: #870000;
+
+}
+.StudentName{
+	width: 70%;
+    display: inline-block;
+}
+.reviewdata{
+	padding-left: 0%;
+}
+.icon-a{
+	color: #FFCC00;
+  border-radius: 50%;
+  border-color: #870000;
+  border: 3em;
+  height: 1em;
+  width: 1em;
+}

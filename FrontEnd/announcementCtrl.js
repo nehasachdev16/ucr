@@ -10,13 +10,22 @@ $scope.Course1 = [
 
 $scope.DisplayForm = function(event){
 	console.log(event.target.id);
-   // alert(event.target.id);
+  // alert(event.target.id);
     $scope.subject=event.target.id;
     $scope.myValue=true;
-   $scope.myTextArea1 = null;
-   $scope.myTextArea2 = null;
-   $scope.myTextArea3 = null;
-   $scope.myTextArea4 = null;
+   $scope.About = null;
+   $scope.Exam = null;
+   $scope.OfficeHours = null;
+   $scope.Info = null;
+}
+
+$scope.SubmitForm = function(){
+	alert("Your changes have been Submitted, Thank you Proffessor!");
+	$scope.result = {"Subject Name": $scope.subject, "About": $scope.About, "Exam:": $scope.Exam, "Office Hours": $scope.OfficeHours, "Extra Info": $scope.Info};
+	//alert($scope.subject + $scope.About + $scope.Exam + $scope.OfficeHours + $scope.Info);
+	alert($scope.result);
+	//window.location.reload();
+	window.location.href ="index.html";
 }
 
 }]);

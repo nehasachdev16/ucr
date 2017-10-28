@@ -1,3 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<div ng-controller="courseReviewCtrl">Course Review</div>
+<head>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.min.css">
+</head>
+
+<div ng-controller="courseReviewCtrl">
+	<!--<div class="heading"> Reviews - All Courses </div>-->
+	
+	
+	<div class="col-md-3">
+	<table>
+		<tr>
+			<th>ID </th>
+			<th>Course Name </th>
+			<th>Reviews</th>
+			
+		</tr>
+		<tr ng-repeat="cr in Course1 track by $index">
+			<td>{{cr.courseId}}</td>
+			<td>{{cr.courseName}}</td>
+			<td><i class="fa fa-hand-o-right fa-2x" id="{{cr.courseId}} {{cr.courseName}}" ng-click="DisplayForm($event)"></i></td>
+	</tr>
+	</table>
+	</div>
+
+   <div class="col-md-7" ng-show="ReviewDiv">
+	<table>
+		<tr>
+			<th>
+				<span class='review'>Reviews (1/10) &nbsp; {{subject}}</span>
+				<span class='dropdown'>
+					<select class="dropdownCss">
+						<option ng-repeat="x in menuItems">{{x}}</option>
+					</select>
+				</span>
+		</tr>
+		<tr ng-repeat="rv in CourseReviews track by $index">
+			<td>
+			<span>{{$index+1}}</span>
+			<span class="StudentName"><b>{{rv.Name}}</b> <small> {{rv.date}}</small></span>
+			<span class="Term"><small>Term :{{rv.Term}}</small> 
+			<span class="fa fa-star fa-1x icon-a" ng-repeat="r in rv.StarRating track by $index" ></span>
+			<br/>
+			<span class="reviewdata">{{rv.data}}</span>
+			</td>
+		</tr>	
+	</table>
+	<center ng-show="ReviewDiv"><b>Pagination</b></center>
+	</div>
+	<div class="col-md-2" ng-show="FilterDiv">
+	<table>
+		<tr>
+			<th>Keywords</th>
+		</tr>	
+
+		<tr>
+			<td><input type="textbox" value="Keyword Search"/> <i class="fa fa-search fa-1x"></i></td>
+		</tr>
+		<tr>
+			<th> Sentiments</th>
+		</tr>
+		<tr>
+		<td><ul ng-repeat="st in Sentiments"><option><input type="checkbox" id="{{st}}" style="margin-right: 10%" />{{st}}</option></ul></td>
+		</tr>
+		<tr>
+			<th>Semesters</th>
+		</tr>
+		<tr>
+		<td><ul ng-repeat="sm in sem">
+			<option><input type="checkbox" id="{{sm}}" style="margin-right: 10%" />{{sm}}</option>
+		</ul></td></tr>
+		<tr>
+			<td><div google-chart chart="myChartObject" style="height:100px; width:100%;"></div></td>
+		</tr>
+	</table>
+
+</div>
+
+
+
+
+
+</div>
+
+</html>
