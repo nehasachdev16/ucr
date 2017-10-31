@@ -24,27 +24,27 @@
 				<tr> <th> Announcements for {{subject}}<th></tr>
 				<tr>
 					<td>Can you please tell about {{subject}} ? </td>
-					<td><textarea rows="4" cols="50" ng-model="myTextArea1"></textarea></td>
+					<td><textarea rows="4" cols="50" ng-model="About"></textarea></td>
 				</tr>
 
 				<tr>
 					<td>Can you give more details on Exam Pattern , Exam Dates & Assignments?</td>
-					<td><textarea rows="4" cols="50" ng-model="myTextArea2"></textarea></td>
+					<td><textarea rows="4" cols="50" ng-model="Exam"></textarea></td>
 				</tr>
 
 				<tr>
 					<td>What will be your office hours this semester?</td>
-					<td><textarea rows="4" cols="50" ng-model="myTextArea3"></textarea></td>
+					<td><textarea rows="4" cols="50" ng-model="OfficeHours"></textarea></td>
 				</tr>
 
 				<tr>
 					<td>Is there any other Information you would like to share about {{subject}} ?</td>
-					<td><textarea rows="4" cols="50" ng-model="myTextArea4"></textarea></td>
+					<td><textarea rows="4" cols="50" ng-model="Info"></textarea></td>
 				</tr>
 
 				<tr>
 					<td></td>
-					<td>Submit</td>
+					<td><input type="button" ng-click="SubmitForm()" value="Submit" id="SubmitBtn"></input></td>
 				</tr>
 
 			</table>
@@ -52,4 +52,9 @@
 
 
 	</div>
+</div>
+
+
+
+</div>
 </div>
