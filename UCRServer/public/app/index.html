@@ -1,70 +1,86 @@
-<!-- created by Neha Sachdev 9/19/2017 -->
+<!--
+    Created by Apoorva on 11/1/2017.
+ -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>University Course Reviews</title>
-
-    <!-- Linking all the CSS files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="app/index.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="app/css/commonCss.css">
-
-    <!--Linking all the asset js files -->
-    <script src="assets/js/angular.min.js"></script>
-    <script src="assets/js/jquery.min.js"></script>
-    <!--<script src="assets/js/bootstrap.min.js"></script>-->
-    <script src="assets/js/angular-route.min.js"></script>
-
-    <!--Linking app.js file (has all the configurations)-->
-    <script src="app/app.js"></script>
-
-    <!--Linking routes file(countains all the FE routes)-->
-    <script src="app/routes.js"></script>
-
-    <!--Linking all the controllers-->
-    <script src="app/maincontroller.js"></script>
-    <script src="app/controller/announcementCtrl.js"></script>
-    <script src="app/controller/courseReviewCtrl.js"></script>
-    <script src="app/controller/ProfessorCtrl.js"></script>
-
-    <!--Linking all the directives-->
-
-    <!--Linking all the common factories-->
-    <script src="app/factory/commonFactory.js"></script>
+	<meta charset="UTF-8">
+	<title> University Course Review </title>
+	<!-- Linking all the CSS files -->
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="app/index.css">
+	<link rel="stylesheet" type="text/css" href="app/css/ucrWrapper.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="app/css/commonCss.css">
+	
+	<!--Linking all the asset js files -->
+	<script src="assets/js/angular.min.js"></script>
+	<script src="assets/js/jquery.min.js"></script>
+	<!--<script src="assets/js/bootstrap.min.js"></script>-->
+	<script src="assets/js/angular-route.min.js"></script>
+	
+	<!--Linking app.js file (has all the configurations)-->
+	<script src="app/app.js"></script>
+	
+	<!--Linking routes file(countains all the FE routes)-->
+	<script src="app/routes.js"></script>
+	
+	<!--Linking all the controllers-->
+	<script src="app/maincontroller.js"></script>
+	<script src="app/controller/ucrWrapperController.js"></script>
+	<script src="app/controller/announcementCtrl.js"></script>
+	<script src="app/controller/courseReviewCtrl.js"></script>
+	<script src="app/controller/ProfessorCtrl.js"></script>
+	
+	<!--Linking all the directives-->
+	
+	<!--Linking all the common factories-->
+	<script src="app/factory/commonFactory.js"></script>
+	<script src="app/factory/authenticateService.js"></script>
 
 </head>
+<body ng-app="ucr" ng-controller="maincontroller">
 
-<body ng-app="ucr" ng-controller="maincontroller" class="container-fluid ucrPageHolder">
-    <div class="panel panel-default">
-        <div class="panel-heading background orangeFont fontHeader">
-            <div class="row">
-                <div class ="col-sm-12"><i class="fa fa-search"></i>  <i class="fa fa-graduation-cap"></i>  {{pageHead}}</div>
-            </div>
-
-        </div>
-        <div class="panel-body entirePageColor">
-            <div class="row">
-
-                <div class="col-sm-4 fontBold" id="prof">Welcome Professor {{ProfName}}!</div>
-                <div class="col-sm-3"></div>
-                <div class="col-sm-3 textAlignEnd"> Last Login: {{timestamp}} </div>
-                <div class="col-sm-2 textAlignEnd">
-                    <i class="fa fa-bell-o fa-lg padding10 cursorPointer"></i>
-                    <i class="fa fa-question-circle-o fa-lg padding10 cursorPointer"></i>
-                    <i class="fa fa-sign-out fa-lg padding10 cursorPointer"></i>
-                </div>
-                </div>
-
-            <div class="container-fluid ucrPageHolder">
-                <div class="panel panel-default">
-                    <ul class="nav nav-tabs">
-                        <li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
-                    </ul>
-                    <div class="panel-body" ng-view></div>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div ng-show="validatingUser">
+		<div class="backgroundTransparent"> </div>
+		<div class="progress pageLoader">
+			<div class="progress-bar progress-bar-striped active background" role="progressbar"
+				 aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+			</div>
+		</div>
+	</div>
+	<div  class="container-fluid ucrPageHolder">
+		<div class="panel panel-default">
+			<div class="panel-heading background orangeFont fontHeader">
+				<div class="row">
+					<div class ="col-sm-12"><i class="fa fa-search"></i>  <i class="fa fa-graduation-cap"></i>  {{pageHead}}</div>
+				</div>
+			
+			</div>
+			<div class="panel-body entirePageColor">
+				<div class="row">
+					
+					<div class="col-sm-4 fontBold" id="prof">Welcome {{username}}!</div>
+					<div class="col-sm-3"></div>
+					<div class="col-sm-3 textAlignEnd"> Last Login: {{timestamp}} </div>
+					<div class="col-sm-2 textAlignEnd">
+						<i class="fa fa-bell-o fa-lg padding10 cursorPointer"></i>
+						<i class="fa fa-question-circle-o fa-lg padding10 cursorPointer"></i>
+						<i class="fa fa-sign-out fa-lg padding10 cursorPointer" ng-click="logout()"></i>
+					</div>
+				</div>
+				
+				<div class="container-fluid ucrPageHolder" ng-controller="ucrWrapperController">
+					<div class="panel panel-default">
+						<ul class="nav nav-tabs">
+							<li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
+						</ul>
+						<div class="panel-body" ng-view></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 </body>
 </html>

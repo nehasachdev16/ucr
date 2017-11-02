@@ -1,8 +1,9 @@
 /**
  * Created by Apoorva on 9/19/2017.
  */
-ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendRequest", "getErrorMessage", "getSuccessMessage","$location", "$timeout", "$window",
-    function ($scope, config, $http, sendRequest, getErrorMessage, getSuccessMessage, $location, $timeout, $window) {
+ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendRequest", "getErrorMessage", "getSuccessMessage",
+    "$location", "$timeout", "$window", "authToken", "authenticate",
+    function ($scope, config, $http, sendRequest, getErrorMessage, getSuccessMessage, $location, $timeout, $window, authToken, authenticate) {
 
         //-------------- Declaring all scope variables -------------------
 
@@ -28,7 +29,17 @@ ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendReques
         $scope.credentialsSuccessful = false;
 
         //-------------- All the functions of the scope -------------------
-        $scope.handleRequest = function( url ){
+        
+		if( authenticate.isLoggedIn() ){
+			console.log("User is logged in");
+			//authenticate.directUserInside();
+		}else{
+			console.log( "User is not logged in");
+			// authenticate.directUserOutside();
+		}
+		
+		
+		$scope.handleRequest = function( url ){
             sendRequest.post(url, $scope.loginCredentials ).then( function ( data ) {
                 console.log("return data : ");
                 console.log( data.data );
@@ -37,13 +48,12 @@ ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendReques
                     $scope.errorMessage = getErrorMessage.get( data.data.errorCode );
                 }else{
                     $scope.credentialsSuccessful = true;
-                    $scope.errorMessage = getSuccessMessage.get( data.data.successCode );
-
+					$scope.credentialsError = true;
+                    $scope.successMessage = getSuccessMessage.get( data.data.successCode );
+	
                     $timeout( function () {
-                        var path = config.apiRequestURL + config.ucrServerPort;
-                        console.log( path );
-                        // location.path( path );
-                        $window.location.href = path;
+                        var path = config.apiRequestURL + config.ucrServerPort + "/"+ data.data.token;
+                        authenticate.directUserInside( path );
                     }, 2000);
                 }
                 console.log( $scope.errorMessage );
@@ -55,6 +65,7 @@ ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendReques
         $scope.submitLoginCredentials = function () {
             console.log("submit login credentials ");
             console.log( $scope.loginCredentials );
+            
             var url = config.apiRequestURL + config.apiRequestPort + config.apiGeneral + config.apiLoginUser;
             console.log( url );
 
@@ -71,5 +82,13 @@ ucrLogin.controller("mainController", [ "$scope", "config", "$http" ,"sendReques
 
             $scope.handleRequest( url );
         };
+        
+        $scope.logout = function () {
+			authToken.deleteToken('token');
+			
+			var windowPath = config.apiRequestURL + config.apiRequestPort;
+			$window.location.href = path;
+		};
+        
     }]);
 

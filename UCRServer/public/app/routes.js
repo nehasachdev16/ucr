@@ -9,7 +9,7 @@ ucr.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
       .when("/profHomePage", {
           templateUrl: "app/views/profHomePage.html"
       })
-      .otherwise({redirectTo: "/profHomePage"});
+      // .otherwise({redirectTo: "/homePage"});
 
     $locationProvider.html5Mode({
         enabled: true,

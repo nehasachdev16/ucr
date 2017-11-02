@@ -10,7 +10,7 @@ var UserSchema = new Schema({
     password: { type: String, require: true },
     email: { type: String, require: true, unique: true },
     identity: {type: String, default: 'student'}
-})
+});
 
 
 UserSchema.pre("save", function (next) {

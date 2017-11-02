@@ -10,6 +10,9 @@ var bodyParser  = require('body-parser');
 var router      = express.Router();
 var appRoutes   = require('./Database/Routes/API')(router);
 var path        = require('path');
+var cors 		= require('cors');
+
+app.use(cors());
 
 // Middlewares
 app.use(morgan('dev'));
@@ -20,17 +23,17 @@ app.use(express.static( __dirname + '/public'));
 app.use('/api', appRoutes);
 
 mongoose.connect('mongodb://localhost:27017/UCRCredentialManager', function ( err ) {
-    if( err ){
-        console.log( "1. Not connected to the MongoDb : "+ err );
-    }else{
-        console.log( "1. Successfully connected to MongoDb");
-    }
+	if( err ){
+		console.log( "1. Not connected to the MongoDb : "+ err );
+	}else{
+		console.log( "1. Successfully connected to MongoDb");
+	}
 });
 
 app.get('*',function ( req, res) {
-    res.sendFile( path.join( __dirname +  '/public/app/index.html' ));
+	res.sendFile( path.join( __dirname +  '/public/app/index.html' ));
 });
 
 app.listen(port, function () {
-    console.log('================ Running UCR Authentication Express server on port ' + port +' ================\n');
+	console.log('================ Running UCR Authentication Express server on port ' + port +' ================\n');
 });
