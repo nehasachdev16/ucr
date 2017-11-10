@@ -31,6 +31,7 @@
 	<script src="app/controller/announcementCtrl.js"></script>
 	<script src="app/controller/courseReviewCtrl.js"></script>
 	<script src="app/controller/ProfessorCtrl.js"></script>
+	<script src="app/controller/studentCourseReviewCtrl.js"></script>
 	
 	<!--Linking all the directives-->
 	
@@ -49,38 +50,92 @@
 			</div>
 		</div>
 	</div>
-	<div  class="container-fluid ucrPageHolder">
-		<div class="panel panel-default">
-			<div class="panel-heading background orangeFont fontHeader">
-				<div class="row">
-					<div class ="col-sm-12"><i class="fa fa-search"></i>  <i class="fa fa-graduation-cap"></i>  {{pageHead}}</div>
-				</div>
-			
+	
+	<div  class="container-fluid height100 ucrPageHolder">
+		<div class="container-fluid panel-heading background orangeFont fontHeader">
+			<div class="row">
+				<div class ="col-sm-12"><i class="fa fa-search"></i>  <i class="fa fa-graduation-cap"></i>  {{pageHead}}</div>
 			</div>
-			<div class="panel-body entirePageColor">
-				<div class="row">
-					
-					<div class="col-sm-4 fontBold" id="prof">Welcome {{username}}!</div>
-					<div class="col-sm-3"></div>
-					<div class="col-sm-3 textAlignEnd"> Last Login: {{timestamp}} </div>
-					<div class="col-sm-2 textAlignEnd">
-						<i class="fa fa-bell-o fa-lg padding10 cursorPointer"></i>
-						<i class="fa fa-question-circle-o fa-lg padding10 cursorPointer"></i>
-						<i class="fa fa-sign-out fa-lg padding10 cursorPointer" ng-click="logout()"></i>
-					</div>
+		
+		</div>
+		
+		<div class="container-fluid">
+			<div class="col-sm-4 fontBold" id="prof">Welcome {{username}}!</div>
+			<div class="col-sm-3"></div>
+			<div class="col-sm-3 textAlignEnd"> Last Login: {{timestamp}} </div>
+			<div class="col-sm-2 textAlignEnd">
+				<i class="fa fa-bell-o fa-lg padding10 cursorPointer"></i>
+				<i class="fa fa-question-circle-o fa-lg padding10 cursorPointer"></i>
+				<i class="fa fa-sign-out fa-lg padding10 cursorPointer" ng-click="logout()"></i>
+			</div>
+		</div>
+		
+		<div class="container-fluid entirePageColor ucrPageHolder height100">
+			<div class="col-sm-1 padding0 coursesMenu height100">
+				<ul class="nav nav-pills nav-stacked">
+					<li style="height: 50px" class="positionRelative" ng-click="openEditCoursesPopup()">
+						<i class="fa fa-pencil fa-lg editCourses"></i>
+					</li>
+					<li ng-class="{'active': $index==studentSelectedCourse}" ng-repeat="tab in studentCourses" ng-click="studentSelectCourse($index)">
+						<a title="{{tab.courseName}}">{{tab.courseId}}</a>
+					</li>
+				</ul>
+			</div>
+			<div class="col-sm-11 padding0">
+				<ul class="nav nav-tabs">
+					<li ng-class="{'active': $index==selectedIndex}" ng-repeat="tab in tabs" ng-click="selectTab($index)">
+						<a href="{{tab.link}}" >{{tab.label}}</a>
+					</li>
+				</ul>
+				<div class="panel-body" ng-view></div>
+			</div>
+		
+		</div>
+	</div>
+
+
+	<!-- Div that allows adding courses to the user-->
+	<div ng-show="studentCoursesNotAvailable">
+		<div class="backgroundTransparentAllowMouse"> </div>
+		
+		<div class="availableCourses container popupHolder">
+			<div class="popupHeading">
+				<span> Add the courses to review: </span>
+				<span class="fa fa-times pull-right" ng-click="closeAddCoursesPopup()"></span>
+			</div>
+			
+			<div class="alert alert-danger" ng-show="studentCourses.length == 0">
+				<strong>No courses!</strong> Add a course from the list below
+			</div>
+			
+			<div class="alert alert-success" ng-show="studentCourses.length > 0">
+				<strong>{{studentCourses.length}}</strong> courses in the list
+			</div>
+			
+			<div ng-repeat="eachCourse in allAvailableCourses | inStudentArray: studentCourses:'courseId'" ng-if="studentCourses.length > 0" >
+				<div class="col-sm-3 eachCourse btn btn-default" type="button" ng-click="addNewCourseToList( eachCourse, $index )">
+					<div> {{eachCourse.courseName}} </div>
+					<div class="fa fa-plus-circle"></div>
 				</div>
-				
-				<div class="container-fluid ucrPageHolder" ng-controller="ucrWrapperController">
-					<div class="panel panel-default">
-						<ul class="nav nav-tabs">
-							<li ng-class="tabClass(tab)" ng-repeat="tab in tabs" tab="tab"><a href="{{tab.link}}" ng-click="setSelectedTab(tab)">{{tab.label}}</a></li>
-						</ul>
-						<div class="panel-body" ng-view></div>
-					</div>
+			</div>
+
+			<div ng-repeat="eachCourse in allAvailableCourses" ng-if="studentCourses.length == 0"  >
+				<div class="col-sm-3 eachCourse btn btn-default" type="button" ng-click="addNewCourseToList( eachCourse, $index )">
+					<div> {{eachCourse.courseName}} </div>
+					<div class="fa fa-plus-circle"></div>
+				</div>
+			</div>
+			
+			<div ng-repeat="eachCourse in studentCourses"  >
+				<div class="col-sm-3 eachCourse btn btn-success" type="button" ng-click="removeNewCourseFromList( eachCourse )">
+					<div> {{eachCourse.courseName}} </div>
+					<div class="fa fa-minus-circle"></div>
 				</div>
 			</div>
 		</div>
+		
 	</div>
 	
+
 </body>
 </html>

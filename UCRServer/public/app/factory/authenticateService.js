@@ -53,3 +53,15 @@ ucr.factory('authToken', [ '$window', 'config', 'sendRequest', function ( $windo
 		}
 	}
 }]);
+
+ucr.factory('userDetailsHolder', function () {
+	var userDetails = {};
+	return{
+		set: function ( userData ) {
+			userDetails = userData;
+		},
+		get: function () {
+			return userDetails;
+		}
+	}
+});

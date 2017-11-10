@@ -1,5 +1,17 @@
+html, body {
+    height: 100vh;
+    overflow: auto;
+    }
+
+.height100{
+    height: 94%;
+    }
+
 .ucrPageHolder{
     padding: 0px !important;
+    background: white;
+    border-radius: 3px;
+    border: solid 2px #F1F1F1;
 }
 .entirePageColor{
     background-color: #F7F7F7;
@@ -17,6 +29,10 @@
     padding: 0 10px;
 }
 
+.padding0{
+    padding: 0;
+    }
+
 .cursorPointer{
     cursor: pointer;
 }
@@ -33,3 +49,7 @@
 .fontBold{
     font-weight: bold;
 }
+
+a{
+    color: black;
+    }

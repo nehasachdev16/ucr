@@ -110,7 +110,7 @@ module.exports = function( router ){
 						var verify = activeToken.verifyRecord( decodedToken.email, decodedToken.userId );
 						if( verify ){
 							res.json({success: true, message: "validated login",
-								ide: decodedToken,
+								token: decodedToken,
 								userIdentity: { username: decodedToken.username, identity: decodedToken.identity} });
 						}else{
 							res.json({success: false, message: "invalid login", statusCode: "6"});
