@@ -5,11 +5,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var reviewSchema = Schema({
-	courseId	: {type: String, require: true},
-	userId		: {type: String, require: true},
-	userName	: {type: String, default: 'Anonymous'},
-	term		: {type: String, default: 'Unknown'},
-	review 		: [{questionId: String, rating: String, text: String}]
+	courseId		: {type: String, require: true},
+	userId			: {type: String, require: true},
+	userName		: {type: String, default: 'Anonymous'},
+	term			: {type: String, default: 'Unknown'},
+	review 			: [{questionId: String, rating: String, text: String}],
+	averageRating	: {type: String, require: true}
 });
 
 module.exports = mongoose.model('reviews', reviewSchema);

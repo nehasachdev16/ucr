@@ -10,8 +10,8 @@ ucrLogin.constant('config', {
     ucrServerPort       : ':9191',
     apiSignupUser       : '/signup_user',
     apiLoginUser        : '/authenticate_user',
-    apiAvailableCourses : '/get_available_courses',
-    announcementCourse : '/announcement_submit'
+    apiAvailableCourses : '/get_available_courses_in_UCR',
+    announcementCourse  : '/announcement_submit'
 });
 
 ucrLogin.constant('errorCodes',{

@@ -38,10 +38,10 @@ ucr.controller("maincontroller",["$scope","$http", "sendRequest", "authenticate"
 					$location.path("/profHomePage");
 					$scope.username = "Professor " + res.data.userIdentity.username ;
 					$scope.tabs = [
-						{ link : 'profHomePage', label : 'Professor Home' },
-						{ link : 'announcement', label : 'Announcements' },
-						{ link : 'courseReview', label : 'Course Reviews' },
-                        {link:'studentAnnouncement',label:'Student Announcement'}
+						{ link : 'profHomePage', 		label : 'Professor Home' },
+						{ link : 'announcement', 		label : 'Announcements' },
+						{ link : 'courseReview', 		label : 'Course Reviews' },
+                        { link:'studentAnnouncement',	label:'Student Announcement'}
 					];
 				}else{
 					$location.path("/studentHomePage");
@@ -78,7 +78,6 @@ ucr.controller("maincontroller",["$scope","$http", "sendRequest", "authenticate"
 					}, function ( err ) {
 						console.log("Error while fetching data");
 					});
-					
 
 				}
 				$scope.selectedIndex = 0;
