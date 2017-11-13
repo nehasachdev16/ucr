@@ -1,12 +1,19 @@
 /**
  * Created by Neha on 10/16/2017.
  */
+<<<<<<< Updated upstream
 var Available_courses = require('../Models/AvailableCourses');
 
 var AllOfferedCourse = require('../Models/AllCourses');
 var UserDetails = require('../Models/userDetails');
 var Course_Reviews = require('../Models/courseReview');
 var Question_Schema = require('../Models/questions');
+=======
+var Available_courses 	= require('../Models/AvailableCourses');
+var AllOfferedCourse 	= require('../Models/AllCourses');
+var UserDetails 		= require('../Models/userDetails');
+var Reviews 			= require('../Models/review');
+>>>>>>> Stashed changes
 
 module.exports = function( router ) {
 	
@@ -144,6 +151,7 @@ module.exports = function( router ) {
 		});
 	});
 	
+<<<<<<< Updated upstream
 
 
 
@@ -264,4 +272,35 @@ module.exports = function( router ) {
     });
     return router;
 
+=======
+	//8. Add a new review
+	router.post('/add_new_review', function ( req, res ) {
+		var review = new Reviews();
+		if( req.body.courseId == null || req.body.courseId == '' ||
+			req.body.userId == null || req.body.userId == '' ||
+			req.body.review.length == 0
+		){
+			console.log( req.body.courseId );
+			console.log( req.body.userId );
+			console.log( req.body.review.length );
+			res.json({success: false, message: "Required fields are mmissing"});
+		}else{
+			review.courseId 	= req.body.courseId;
+			review.userId	 	= req.body.userId;
+			if( req.body.userName == null || req.body.userName == ''){
+				review.userName	= req.body.userName;
+			}
+			if( req.body.term == null || req.body.term == ''){
+				review.term		= req.body.term;
+			}
+			review.review 		= req.body.review;
+			review.save( function ( err ) {
+				if( err ) throw err;
+				res.json({success: true, message: "Inserted on review"});
+			})
+		}
+	});
+	
+	return router;
+>>>>>>> Stashed changes
 };
