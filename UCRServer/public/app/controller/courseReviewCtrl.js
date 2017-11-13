@@ -1,4 +1,4 @@
-ucr.controller("courseReviewCtrl",["$scope","$http",function($scope,$http){
+ucr.controller("courseReviewCtrl",["$scope","$http","config","sendRequest",function($scope,$http,config,sendRequest){
     console.log("courseReviewCtrl");
     $scope.ReviewDiv=false;
     $scope.FilterDiv=false;
@@ -8,8 +8,7 @@ ucr.controller("courseReviewCtrl",["$scope","$http",function($scope,$http){
         {courseId:'CSCI571',courseName:'Web Technologies'},
         {courseId:'CSCI572',courseName:'Information Retrieval & Web Search Engines'}];
 
-    $scope.CourseReviews = [
-        {},{},{},{},{}];
+
     var ratingTotal = 5;
 
     $scope.getRepeater = function() {
@@ -20,45 +19,79 @@ ucr.controller("courseReviewCtrl",["$scope","$http",function($scope,$http){
 
     $scope.DisplayForm = function(event){
         console.log(event.target.id);
-        $scope.subject=event.target.id;
-        $scope.ReviewDiv=true;
-        $scope.FilterDiv=true;
-        $scope.Sentiments = ['Positive', 'Negative','Nuetral'];
-        $scope.sem=['Spring 2016','Summer 2016','Fall 2016','Spring 2017','Summer 2017','Fall 2017'];
+        $scope.parameter=event.target.id;
 
+        var url = config.apiRequestURL + config.ucrServerPort + config.apiGeneral + config.courseReviewReadView;
+        var param = {courseNameID:$scope.parameter};
 
-        if($scope.subject == "CSCI586 Database Systems Interoperability")
-        {
+        sendRequest.post( url,param).then( function ( data ) {
+            console.log(data.data);
+        if(data.data.data.length > 0){
+
+            $scope.subject=event.target.id;
+            $scope.ReviewDiv=true;
+            $scope.FilterDiv=true;
+            $scope.Sentiments = ['Positive', 'Negative','Nuetral'];
+            $scope.sem=['Spring 2016','Summer 2016','Fall 2016','Spring 2017','Summer 2017','Fall 2017'];
             console.log("CSCI586 Course Reviews");
-            $scope.CourseReviews =[];
-            $scope.CourseReviews = [
-                {Name:'Aakanksha Pincha', date: 'May 1st, 2017',Term :'Fall 2016',StarRating:[1,2,3,4],data: 'Lot of informative papers provided in the course. Very knowledgeable subject. Advise to take it it in Fall semester only.Course Grading is also not very strict'},
-                {Name:'Neha Sachdev', date: 'May 31st, 2017',Term :'Fall 2016',StarRating:[1,2,3,4],data: 'Technology Oriented Course. Lot of informative papers provided in the course. Very knowledgeable subject. Advise to take it it in Fall semester only.Course Grading is also not very strict'},
-                {Name:'Apoorva Viswanath', date: 'Aug 1st, 2017',Term :'Fall 2016',StarRating:[1,2,3],data: 'Ontology learnings. Lot of informative papers provided in the course. Very knowledgeable subject. Advise to take it it in Fall semester only.Course Grading is also not very strict'},
-                {Name:'Anushree Ramanath', date: 'July 1st, 2017',Term :'Fall 2016',StarRating:[1],data: 'Good Projects. Lot of informative papers provided in the course. Very knowledgeable subject. Advise to take it it in Fall semester only.Course Grading is also not very strict'},
-                {Name:'Aanchal Gupta', date: 'July 1st, 2017',Term :'Fall 2016',StarRating:[1,2],data: 'Tough Course. Lot of informative papers provided in the course. Very knowledgeable subject. Advise to take it it in Fall semester only.Course Grading is also not very strict'}];
+            $scope.CourseReviews =data.data.data;
+            console.log($scope.CourseReviews);
+
+            $scope.noOfReviews = data.data.data.length;
 
 
+
+
+
+        }else{
+            alert("No reviews for this Course so far!");
+            $scope.ReviewDiv=false;
+            $scope.FilterDiv=false;
         }
 
-        if($scope.subject == "CSCI585 Database Systems")
-        {
-            $scope.CourseReviews =[];
+        }, function (err) {
+            console.log( err );
+        });
 
-        }
-
-        if($scope.subject == "CSCI571 Web Technologies")
-        {
-            $scope.CourseReviews =[];
-        }
-
-        if($scope.subject == "CSCI572 Information Retrieval & Web Search Engines")
-        {
-            $scope.CourseReviews =[];
-        }
 
     }
+        $scope.ShowDetails=function (data) {
 
+            //getting the questions:
+            var url = config.apiRequestURL + config.ucrServerPort + config.apiGeneral + config.getQuestions;
+            sendRequest.post( url).then( function ( data ) {
+
+                console.log(data);
+            }, function (err) {
+                console.log( err );
+            });
+
+
+
+            //Question 1 Details for the clicked user
+            $scope.Q1Review = data.Q1.review;
+            $scope.Q1Rating = data.Q1.rating;
+
+            //Question 2 Details for the clicked user
+            $scope.Q2Review = data.Q2.review;
+            $scope.Q2Rating = data.Q2.rating;
+
+            //Question3 details for the clicked user
+            $scope.Q3Review = data.Q3.review;
+            $scope.Q3Rating = data.Q3.rating;
+
+            //Question4 details for the clicked user
+            $scope.Q4Review = data.Q4.review;
+            $scope.Q4Rating = data.Q4.rating;
+
+            //Question5 details for the clicked user
+            $scope.Q5Review = data.Q5.review;
+            $scope.Q5Rating = data.Q5.rating;
+
+
+
+
+        }
 
 
 }]);

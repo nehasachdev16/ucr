@@ -1,4 +1,5 @@
 ucr.config(['$routeProvider','$locationProvider', function($routeProvider,$locationProvider){
+
 	$routeProvider
 		.when("/announcement", {
 			templateUrl: "app/views/announcement.html"
@@ -9,6 +10,9 @@ ucr.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
 		.when("/profHomePage", {
 			templateUrl: "app/views/profHomePage.html"
 		})
+        .when("/studentAnnouncement", {
+            templateUrl: "app/views/studentAnnouncement.html"
+        })
 		.when("/studentHomePage", {
 			templateUrl: "app/views/studentCourseReview.html"
 		})
@@ -19,4 +23,5 @@ ucr.config(['$routeProvider','$locationProvider', function($routeProvider,$locat
 		enabled: true,
 		requireBase: false
 	});
+
 }]);

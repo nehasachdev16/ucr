@@ -1,9 +1,12 @@
 /**
- * Created by Apoorva on 10/16/2017.
+ * Created by Neha on 10/16/2017.
  */
 var Available_courses = require('../Models/AvailableCourses');
+
 var AllOfferedCourse = require('../Models/AllCourses');
 var UserDetails = require('../Models/userDetails');
+var Course_Reviews = require('../Models/courseReview');
+var Question_Schema = require('../Models/questions');
 
 module.exports = function( router ) {
 	
@@ -15,29 +18,7 @@ module.exports = function( router ) {
 	
 	// 1. /add_to_available_courses is meant as an internal BE call - to be called when a new course starts to have
 	//     reviews in it
-	router.post('/add_to_available_courses', function (req,res) {
-		var ac = new Available_courses();
-		
-		if( req.body.courseId || req.body.courseName ) {
-			ac.courseId = req.body.courseId;
-			ac.courseName = req.body.courseName;
-			ac.save(function (err) {
-				if (req.body.courseId == null || req.body.courseId == '' ||
-					req.body.courseName == null || req.body.courseName == ''
-				) {
-					res.json({success: false, message: "Some fields empty"});
-				} else {
-					if (err) {
-						res.json({success: false, message: "Course Already exists"})
-					} else {
-						res.json({success: true, message: 'new user created'});
-					}
-				}
-			})
-		}else{
-			res.json({success:false, message: "Required fields are missing"});
-		}
-	});
+
 	
 	//2. /get_available_courses is meant to return all the courses for which reviews are available
 	router.get('/get_available_courses',function (req,res) {
@@ -163,5 +144,124 @@ module.exports = function( router ) {
 		});
 	});
 	
-	return router;
+
+
+
+
+
+    router.use(function(req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    });
+
+    //1. Add the announcement details in the Database
+    router.post('/add_to_available_courses', function (req,res) {
+        var ac = new Available_courses();
+
+        if( req.body.courseNameID) {
+            ac.courseId = req.body.courseId;
+            ac.courseInfo = req.body.courseInfo;
+            ac.examInfo = req.body.examInfo;
+            ac.moreInfo = req.body.moreInfo;
+            ac.courseNameID = req.body.courseNameID;
+            ac.officeInfo = req.body.officeInfo;
+            ac.save(function (err) {
+                if (
+                    req.body.courseNameID == null || req.body.courseNameID == '') {
+                    res.json({success: false, message: "Some fields empty"});
+                } else {
+                    if (err) {
+                        res.json({success: false, message: "Course Already exists"})
+                    } else {
+                        res.json({success: true, message: 'new user created'});
+                    }
+                }
+            })
+        }else{
+            res.json({success:false, message: "Required fields are missing"});
+        }
+    });
+
+    //2) Getting the Announcement Details and displaying
+    router.post('/get_announcement',function (req,res) {
+
+        Available_courses.find({"courseNameID":req.body.courseName}).exec( function (err, result) {
+            if( err ) throw err;
+            if( !result ){
+                res.json({success:false, message: "no data to fetch"})
+            }
+
+            res.json( {success:true, data: result} );
+        });
+    });
+
+   // 3) Adding the Course Reviews
+
+    router.post('/add_courseReview_Student', function (req,res) {
+        var cr = new Course_Reviews();
+
+
+        //var date = new Date(req.body.dateReview);
+        if( req.body.courseNameID || req.body.id || req.body.term  || req.body.Q1 || req.body.Q2
+        || req.body.Q3 || req.body.Q4 || req.body.Q5 || req.body.avgStarRating || req.body.generalReview) {
+
+           cr.courseNameID=req.body.courseNameID;
+           cr.id=req.body.id;
+           cr.name=req.body.name;
+           cr.email = req.body.email;
+           cr.dateReview=req.body.dateReview;
+           cr.term=req.body.term;
+           cr.Q1 = req.body.Q1;
+           cr.Q2 = req.body.Q2;
+           cr.Q3 = req.body.Q3;
+           cr.Q4 = req.body.Q4;
+           cr.Q5 = req.body.Q5;
+           cr.avgStarRating = req.body.avgStarRating;
+
+            cr.save(function (err) {
+                if (req.body.courseNameID == null || req.body.courseNameID == '' || req.body.id == null || req.body.id=='' ||
+                req.body.term == null || req.body.term=='' || req.body.Q1==null || req.body.Q2==null || req.body.Q3==null
+                || req.body.Q4==null || req.body.Q5==null || req.body.avgStarRating == '' || req.body.avgStarRating== null || req.body.generalReview == null
+                || req.body.generalReview =='') {
+                    res.json({success: false, message: "Some fields empty"});
+                } else {
+                    if (err) {
+                        res.json({success: false, message: "Same Record Exists"})
+                    } else {
+                        res.json({success: true, message: 'new review created'});
+                    }
+                }
+            })
+        }else{
+            res.json({success:false, message: "Required fields are missing"});
+        }
+    });
+
+    //Getting the course Reviews on basis of a courseNameID , eg CSCI 585 Database Systems
+    router.post('/get_courseReview',function (req,res) {
+
+        Course_Reviews.find({"courseNameID":req.body.courseNameID}).exec( function (err, result) {
+            if( err ) throw err;
+            if( !result ){
+                res.json({success:false, message: "no data to fetch"})
+            }
+
+            res.json( {success:true, data: result} );
+        });
+    });
+
+    router.post('/get_questions',function (req,res) {
+
+        Question_Schema.find().exec( function(err,result){
+            if( err ) throw err;
+            if(!result){
+                res.json({success:false, message: "no data to fetch"})
+            }
+            res.json( {success:true, data: result} );
+        });
+
+    });
+    return router;
+
 };

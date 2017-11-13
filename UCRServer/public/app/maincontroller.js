@@ -40,7 +40,8 @@ ucr.controller("maincontroller",["$scope","$http", "sendRequest", "authenticate"
 					$scope.tabs = [
 						{ link : 'profHomePage', label : 'Professor Home' },
 						{ link : 'announcement', label : 'Announcements' },
-						{ link : 'courseReview', label : 'Course Reviews' }
+						{ link : 'courseReview', label : 'Course Reviews' },
+                        {link:'studentAnnouncement',label:'Student Announcement'}
 					];
 				}else{
 					$location.path("/studentHomePage");
@@ -170,6 +171,7 @@ ucr.controller("maincontroller",["$scope","$http", "sendRequest", "authenticate"
 		
 	}]);
 
+
 ucr.filter( 'inStudentArray', function ( $filter ) {
 	return function(list, arrayFilter , element) {
 		if ( arrayFilter ) {
@@ -183,3 +185,4 @@ ucr.filter( 'inStudentArray', function ( $filter ) {
 		}
 	}
 });
+
