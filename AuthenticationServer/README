@@ -25,6 +25,10 @@ nodemon Server.js
 netstat -a -o -n | find <port number>
 taskkill /F /PID XXXX
 
+#other packages in UCR
+npm install angular1-star-rating --save
+npm install bootstrap-toggle --save
+
 #=========================== GIT commands ====================
 
 git checkout -t new_branch master

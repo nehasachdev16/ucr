@@ -1,5 +1,90 @@
 <div ng-controller="studentCourseReviewCtrl">
 
-{{data}}
+	<!--Select a course (if course id is not received in this controller)-->
+	<div ng-hide="requestReceived" class="alert alert-info" style="width: 15%">
+		<i class="fa fa-hand-o-left" aria-hidden="true"></i>
+		<strong> Select a course ! </strong>
+	</div>
+	
+	<!--If no reviews are available, then new review has to be entered-->
+	<div ng-show="noReviewDataAvailable && !addANewReviewScreen" class="alert alert-info" style="width: 25%">
+ 		<strong> No review available! </strong>
+		<div class="cursorPointer" ng-click="addANewReview()">
+			Give review
+			<i class="fa fa-pencil" aria-hidden="true"></i>
+		</div>
+	</div>
+	
+	<!--Add a new review holder-->
+	<div ng-show="addANewReviewScreen">
+		<div class="backgroundTransparentAllowMouse"> </div>
+		
+		<div class="availableCourses container popupHolderReview">
+			<div class="popupHeading">
+				<span> Add a review: </span>
+				<span class="fa fa-times pull-right cursorPointer" ng-click="closeAddReviewPopup()"></span>
+			</div>
+			
+			<div class="alert alert-warning" ng-show="reviewAnswersMissing">
+				<strong>Missing fields</strong> (General comments and ratings are compulsory)
+			</div>
+			
+			<div class="alert alert-danger" ng-show="someErrorinReviewScreen">
+				<strong>Error!</strong> error in inserting
+			</div>
+			
+			<!--General compulsory comments-->
+			<div class="container">
+				<div class="form-group col-sm-8">
+					<label>General Comments: </label>
+					<textarea class="form-control" rows="3" ng-model="completeReview.generalReview"></textarea>
+				</div>
+				
+				<div class="col-sm-2">
+					<label>Display identity: </label>
+					<toggle ng-model="completeReview.showIdentity" ng-change="changed()" on="Show Name" off="Stay Anonymous"></toggle>
+				</div>
+				
+				<div class="col-sm-2">
+					<label>Select a term: </label>
+					<select ng-model="completeReview.term" ng-options="val for val in availableTerms">
+						<option value=""></option>
+					</select>
+				</div>
+			</div>
+			
+			<div class="popupScroll container">
+				<div class="form-group col-sm-4" ng-repeat="(idx, eachQuestion) in reviewQuestions" >
+					<label> {{eachQuestion.question}}: </label>
+					
+					<jk-rating-stars max-rating="5" color="'positive'" rating="completeReview.review[idx]['rating']" on-rating="completeReview.review[idx]['rating']=rating" >
+					</jk-rating-stars>
+					
+					<textarea class="form-control" rows="1" ng-model="completeReview.review[idx]['text']"></textarea>
+				</div>
+			</div>
+			<br>
+			<div class="pull-right">
+				<button type="button" class="btn btn-warning" ng-click="clearAllReview();">Clear All</button>
+				<button type="button" class="btn btn-success" ng-click="submitReview()">Submit</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<!--Display all the reviews, include the filters in this-->
+	<div ng-show="requestReceived && !noReviewDataAvailable">
+		<div class="btn btn-info">
+			<div class="cursorPointer" ng-click="addANewReview()">
+				Give review
+				<i class="fa fa-pencil" aria-hidden="true"></i>
+			</div>
+		</div>
+		<div>
+			<div class="deleteThis" ng-repeat="eachReview in courseReview">
+				<div> {{eachReview}} </div>
+			</div>
+		</div>
+	</div>
 
 </div>

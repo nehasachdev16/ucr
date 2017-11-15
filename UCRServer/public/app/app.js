@@ -1,4 +1,4 @@
-var ucr = angular.module("ucr", ["ngRoute"]);
+var ucr = angular.module("ucr", ["ngRoute","jkAngularRatingStars","ui.toggle"]);
 
 
 var description = "is an platform for ...... \n Neha write something good here";
@@ -19,6 +19,12 @@ ucr.constant('config', {
 	removeCourseFromList		: '/delete_course_from_review_list',
 	apiSignupUser               : '/signup_user',
 	apiLoginUser                : '/authenticate_user',
+	getAllReviews				: '/get_all_course_review',		//Incase replacement is needed, change this handle
+	getAllReviewQuestions		: '/get_all_review_question',
+	addNewReview				: '/add_new_review',
+	
+	availableTerms				: ["Fall-2015","Spring-2016","Summer-2016","Fall-2016","Spring-2017","Summer-2017","Fall-2017"],
+	
 	apiAvailableCourses         : '/get_available_courses',
 	announcementCourse          : '/add_to_available_courses',
 	studentAnnouncement         : '/get_announcement',

@@ -1,12 +1,12 @@
 /**
  * Created by Neha on 10/16/2017.
  */
-var Available_courses = require('../Models/AvailableCourses');
-var Available_courses_In_UCR = require('../Models/AvailableCoursesInUCR');
-var AllOfferedCourse 	= require('../Models/AllCourses');
-var UserDetails 		= require('../Models/userDetails');
-var Course_Reviews 			= require('../Models/review');
-var Question_Schema 	= require('../Models/questions');
+var Available_courses 			= require('../Models/AvailableCourses');
+var Available_courses_In_UCR 	= require('../Models/AvailableCoursesInUCR');
+var AllOfferedCourse 			= require('../Models/AllCourses');
+var UserDetails 				= require('../Models/userDetails');
+var Course_Reviews 				= require('../Models/review');
+var Question		 			= require('../Models/questions');
 
 module.exports = function( router ) {
 	
@@ -200,6 +200,42 @@ module.exports = function( router ) {
 			if( err ) throw err;
 			if( !result ){
 				res.json({success:false, message: "no data to fetch"})
+			}
+			res.json( {success:true, data: result} );
+		});
+	});
+	
+	//A10. Insert Questions for review - can be a bulk insert of many questions
+	router.post('/insert_all_review_questions', function ( req, res ) {
+		if( req.body.length > 0 ){
+			var count = 0;
+			for( var i=0; i<req.body.length; i++){
+				eachQuestion = req.body[i];
+				var q = new Question();
+				q.question = eachQuestion.question;
+				q.save( function ( err ) {
+					if( err ) {
+						res.json({success: false, message: "Some questions not inserted"});
+					}	else {
+						count = count + 1;
+						if( count === req.body.length-1 ){
+							res.json({success: true, message: "All questions inserted"});
+						}
+					}
+				});
+			}
+			
+		}else{
+			res.json({success: false, messge: "There is no data to insert"});
+		}
+	});
+	
+	//A11. Get all the questions:
+	router.get('/get_all_review_question', function ( req, res ) {
+		Question.find({}).exec( function (err, result) {
+			if( err ) throw err;
+			if( !result ){
+				res.json({success:false, message: "no questions to fetch"})
 			}
 			res.json( {success:true, data: result} );
 		});

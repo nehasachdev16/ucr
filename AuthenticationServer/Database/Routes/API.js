@@ -2,7 +2,7 @@
  * Created by Apoorva on 9/27/2017.
  */
 var User        = require('../Models/User');
-var UserSession = require('../Models/userSession')
+var UserSession = require('../Models/userSession');
 var jwt         = require('jsonwebtoken');
 var secret      = "UniversityOfSouthernCalifornia";
 

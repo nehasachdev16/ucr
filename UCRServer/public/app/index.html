@@ -12,13 +12,19 @@
 	<link rel="stylesheet" type="text/css" href="app/index.css">
 	<link rel="stylesheet" type="text/css" href="app/css/ucrWrapper.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/jk-rating-stars.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/startRatingExtra.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/angular-bootstrap-toggle.css">
 	<link rel="stylesheet" type="text/css" href="app/css/commonCss.css">
+	<link rel="stylesheet" type="text/css" href="app/css/studentCourseReview.css">
+	
 	
 	<!--Linking all the asset js files -->
 	<script src="assets/js/angular.min.js"></script>
 	<script src="assets/js/jquery.min.js"></script>
 	<!--<script src="assets/js/bootstrap.min.js"></script>-->
 	<script src="assets/js/angular-route.min.js"></script>
+	<script src="assets/js/angular-bootstrap-toggle.js"></script>
 	
 	<!--Linking app.js file (has all the configurations)-->
 	<script src="app/app.js"></script>
@@ -37,6 +43,8 @@
 
 
 	<!--Linking all the directives-->
+	<!--<script src="assets/angular1-star-rating/dist/index.js"></script>-->
+	<script src="assets/js/jk-rating-stars.js"></script>
 	
 	<!--Linking all the common factories-->
 	<script src="app/factory/commonFactory.js"></script>
@@ -79,21 +87,21 @@
 			<!--Hide this when it is prof view-->
 			<div class="col-sm-1 padding0 coursesMenu height100" ng-hide="identity=='professor'">
 				<ul class="nav nav-pills nav-stacked">
-					<li style="height: 50px" class="positionRelative" ng-click="openEditCoursesPopup()">
+					<li style="height: 50px" class="positionRelative cursorPointer" ng-click="openEditCoursesPopup()">
 						<i class="fa fa-pencil fa-lg editCourses"></i>
 					</li>
-					<li ng-class="{'active': $index==studentSelectedCourse}" ng-repeat="tab in studentCourses" ng-click="studentSelectCourse($index)">
+					<li class="cursorPointer" ng-class="{'active': $index==studentSelectedCourse}" ng-repeat="tab in studentCourses" ng-click="studentSelectCourse($index)">
 						<a title="{{tab.courseName}}">{{tab.courseId}}</a>
 					</li>
 				</ul>
 			</div>
-			<div ng-class="{true:'col-sm-12', false: 'col-sm-11 padding0'}[identity=='professor']">
+			<div ng-class="{true:'col-sm-12', false: 'col-sm-11 padding0 height100'}[identity=='professor']">
 				<ul class="nav nav-tabs">
 					<li ng-class="{'active': $index==selectedIndex}" ng-repeat="tab in tabs" ng-click="selectTab($index)">
 						<a href="{{tab.link}}" >{{tab.label}}</a>
 					</li>
 				</ul>
-				<div class="panel-body contentWrapper" ng-view></div>
+				<div class="panel-body contentWrapper height100" ng-view></div>
 			</div>
 		
 		</div>

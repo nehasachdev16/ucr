@@ -162,7 +162,6 @@ ucr.controller("maincontroller",["$scope","$http", "sendRequest", "authenticate"
 			//Check which tab is selected and call the respective data population calls
 			console.log( $location.path() );
 			var path = $location.path();
-			$scope.dataTopopulate = "Apoorva";
 			if( path === '/studentHomePage'){
 				$scope.$broadcast('studentHomePage',$scope.studentCourses[index]);
 			}
