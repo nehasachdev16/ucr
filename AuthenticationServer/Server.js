@@ -22,7 +22,7 @@ app.use(express.static( __dirname + '/public'));
 // Backend routes will have a /api just to distinguish
 app.use('/api', appRoutes);
 
-mongoose.connect('mongodb://localhost:27017/UCRCredentialManager', function ( err ) {
+mongoose.connect('mongodb://localhost:2000/UCRCredentialManager', function ( err ) {
 	if( err ){
 		console.log( "1. Not connected to the MongoDb : "+ err );
 	}else{

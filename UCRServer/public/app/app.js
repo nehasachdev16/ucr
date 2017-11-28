@@ -3,6 +3,7 @@ var ucr = angular.module("ucr", ["ngRoute","jkAngularRatingStars","ui.toggle"]);
 
 var description = "is an platform for ...... \n Neha write something good here";
 ucr.constant('config', {
+
 	appName             : 'University Course Review',
 	appDescription      : description,
 	apiRequestURL       : 'http://localhost',
@@ -30,7 +31,12 @@ ucr.constant('config', {
 	studentAnnouncement         : '/get_announcement',
 	courseReviewStudent         : '/add_courseReview_Student',
 	courseReviewReadView        : '/get_courseReview',
-	getQuestions                : '/get_questions'
+	getQuestions                : '/get_questions',
+	getCoursesSelectedByUser	: '/get_course_to_review_list',
+    getAllAvailableCourses		: '/get_offered_courses',
+    addNewCourseToList			: '/add_course_to_review_list',
+    removeCourseFromList		: '/delete_course_from_review_list'
+
 });
 
 ucr.constant('errorCodes',{

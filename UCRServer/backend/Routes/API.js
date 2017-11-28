@@ -5,8 +5,9 @@ var Available_courses 			= require('../Models/AvailableCourses');
 var Available_courses_In_UCR 	= require('../Models/AvailableCoursesInUCR');
 var AllOfferedCourse 			= require('../Models/AllCourses');
 var UserDetails 				= require('../Models/userDetails');
-var Course_Reviews 				= require('../Models/review');
+var Course_Reviews 				= require('../Models/courseReview');
 var Question		 			= require('../Models/questions');
+var Question_Schema = require('../Models/questions');
 
 module.exports = function( router ) {
 	
@@ -256,74 +257,75 @@ module.exports = function( router ) {
         });
     });
 
+   // ================================= Neha's review code ===============================
+// 3) Adding the Course Reviews
+ router.post('/add_courseReview_Student', function (req,res) {
+     var cr = new Course_Reviews();
+
+
+     //var date = new Date(req.body.dateReview);
+     if( req.body.courseNameID || req.body.id || req.body.term  || req.body.Q1 || req.body.Q2
+     || req.body.Q3 || req.body.Q4 || req.body.Q5 || req.body.avgStarRating || req.body.generalReview) {
+
+        cr.courseNameID=req.body.courseNameID;
+        cr.id=req.body.id;
+        cr.name=req.body.name;
+        cr.email = req.body.email;
+        cr.dateReview=req.body.dateReview;
+        cr.term=req.body.term;
+        cr.Q1 = req.body.Q1;
+        cr.Q2 = req.body.Q2;
+        cr.Q3 = req.body.Q3;
+        cr.Q4 = req.body.Q4;
+        cr.Q5 = req.body.Q5;
+        cr.avgStarRating = req.body.avgStarRating;
+
+         cr.save(function (err) {
+             if (req.body.courseNameID == null || req.body.courseNameID == '' || req.body.id == null || req.body.id=='' ||
+             req.body.term == null || req.body.term=='' || req.body.Q1==null || req.body.Q2==null || req.body.Q3==null
+             || req.body.Q4==null || req.body.Q5==null || req.body.avgStarRating == '' || req.body.avgStarRating== null || req.body.generalReview == null
+             || req.body.generalReview =='') {
+                 res.json({success: false, message: "Some fields empty"});
+             } else {
+                 if (err) {
+                     res.json({success: false, message: "Same Record Exists"})
+                 } else {
+                     res.json({success: true, message: 'new review created'});
+                 }
+             }
+         })
+     }else{
+         res.json({success:false, message: "Required fields are missing"});
+     }
+ });
+
+//Getting the course Reviews on basis of a courseNameID , eg CSCI 585 Database Systems
+router.post('/get_courseReview',function (req,res) {
+
+    Course_Reviews.find({"courseNameID":req.body.courseNameID}).exec( function (err, result) {
+        if( err ) throw err;
+        if( !result ){
+            res.json({success:false, message: "no data to fetch"})
+        }
+
+        res.json( {success:true, data: result} );
+    });
+});
+
+router.post('/get_questions',function (req,res) {
+
+    Question_Schema.find().exec( function(err,result){
+        if( err ) throw err;
+        if(!result){
+            res.json({success:false, message: "no data to fetch"})
+        }
+        res.json( {success:true, data: result} );
+    });
+
+});
+
     return router;
 
 };
 
 
-//================================= Neha's review code ===============================
-// // 3) Adding the Course Reviews
-//  router.post('/add_courseReview_Student', function (req,res) {
-//      var cr = new Course_Reviews();
-//
-//
-//      //var date = new Date(req.body.dateReview);
-//      if( req.body.courseNameID || req.body.id || req.body.term  || req.body.Q1 || req.body.Q2
-//      || req.body.Q3 || req.body.Q4 || req.body.Q5 || req.body.avgStarRating || req.body.generalReview) {
-//
-//         cr.courseNameID=req.body.courseNameID;
-//         cr.id=req.body.id;
-//         cr.name=req.body.name;
-//         cr.email = req.body.email;
-//         cr.dateReview=req.body.dateReview;
-//         cr.term=req.body.term;
-//         cr.Q1 = req.body.Q1;
-//         cr.Q2 = req.body.Q2;
-//         cr.Q3 = req.body.Q3;
-//         cr.Q4 = req.body.Q4;
-//         cr.Q5 = req.body.Q5;
-//         cr.avgStarRating = req.body.avgStarRating;
-//
-//          cr.save(function (err) {
-//              if (req.body.courseNameID == null || req.body.courseNameID == '' || req.body.id == null || req.body.id=='' ||
-//              req.body.term == null || req.body.term=='' || req.body.Q1==null || req.body.Q2==null || req.body.Q3==null
-//              || req.body.Q4==null || req.body.Q5==null || req.body.avgStarRating == '' || req.body.avgStarRating== null || req.body.generalReview == null
-//              || req.body.generalReview =='') {
-//                  res.json({success: false, message: "Some fields empty"});
-//              } else {
-//                  if (err) {
-//                      res.json({success: false, message: "Same Record Exists"})
-//                  } else {
-//                      res.json({success: true, message: 'new review created'});
-//                  }
-//              }
-//          })
-//      }else{
-//          res.json({success:false, message: "Required fields are missing"});
-//      }
-//  });
-
-// //Getting the course Reviews on basis of a courseNameID , eg CSCI 585 Database Systems
-// router.post('/get_courseReview',function (req,res) {
-//
-//     Course_Reviews.find({"courseNameID":req.body.courseNameID}).exec( function (err, result) {
-//         if( err ) throw err;
-//         if( !result ){
-//             res.json({success:false, message: "no data to fetch"})
-//         }
-//
-//         res.json( {success:true, data: result} );
-//     });
-// });
-//
-// router.post('/get_questions',function (req,res) {
-//
-//     Question_Schema.find().exec( function(err,result){
-//         if( err ) throw err;
-//         if(!result){
-//             res.json({success:false, message: "no data to fetch"})
-//         }
-//         res.json( {success:true, data: result} );
-//     });
-//
-// });

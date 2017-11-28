@@ -33,11 +33,11 @@ th {
     font-weight:100;
 }
 /*delete this property before commit*/
-th {
+/*th {
     background-color: darkgray;
     color: white;
     font-weight:100;
-}
+}*/
 
 #font{
 	margin-right: 1.2em;

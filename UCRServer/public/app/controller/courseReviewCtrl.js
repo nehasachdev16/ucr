@@ -1,6 +1,7 @@
 ucr.controller("courseReviewCtrl",["$scope","$http","config","sendRequest",function($scope,$http,config,sendRequest){
     console.log("courseReviewCtrl");
     $scope.ReviewDiv=false;
+    $scope.ReviewQuestion=false;
     $scope.FilterDiv=false;
     $scope.Course1 = [
         {courseId:'CSCI585',courseName:'Database Systems'},
@@ -18,6 +19,7 @@ ucr.controller("courseReviewCtrl",["$scope","$http","config","sendRequest",funct
     $scope.menuItems = ['Newest first', 'Oldest first', 'Best rating','Worst rating'];
 
     $scope.DisplayForm = function(event){
+        $scope.ReviewQuestion=false;
         console.log(event.target.id);
         $scope.parameter=event.target.id;
 
@@ -55,38 +57,45 @@ ucr.controller("courseReviewCtrl",["$scope","$http","config","sendRequest",funct
 
 
     }
-        $scope.ShowDetails=function (data) {
+        $scope.ShowDetails=function (reviews) {
 
+
+            $scope.ReviewDiv=false;
+            $scope.ReviewQuestion=true;
+
+            console.log("The reviews are");
+            console.log(reviews);
+            $scope.name = reviews.name;
+            $scope.courseSelected = reviews.courseNameID;
             //getting the questions:
             var url = config.apiRequestURL + config.ucrServerPort + config.apiGeneral + config.getQuestions;
-            sendRequest.post( url).then( function ( data ) {
+            sendRequest.post( url).then( function ( data1 ) {
 
-                console.log(data);
+                //console.log(data1.data.data);
+                $scope.Questions = data1.data.data;
+                $scope.Reviews = reviews.reviews;
+
+                console.log("The Questions are");
+                console.log($scope.Questions);
+                console.log("The reviews are");
+                console.log($scope.Reviews);
+
+                var ratingTotal = 5;
+
+                $scope.getRepeater = function() {
+                    return new Array(ratingTotal);
+                };
+               // $scope.res = {"Question":$scope.Questions,"Review":$scope.Reviews};
+
+
             }, function (err) {
                 console.log( err );
             });
 
 
 
-            //Question 1 Details for the clicked user
-            $scope.Q1Review = data.Q1.review;
-            $scope.Q1Rating = data.Q1.rating;
 
-            //Question 2 Details for the clicked user
-            $scope.Q2Review = data.Q2.review;
-            $scope.Q2Rating = data.Q2.rating;
 
-            //Question3 details for the clicked user
-            $scope.Q3Review = data.Q3.review;
-            $scope.Q3Rating = data.Q3.rating;
-
-            //Question4 details for the clicked user
-            $scope.Q4Review = data.Q4.review;
-            $scope.Q4Rating = data.Q4.rating;
-
-            //Question5 details for the clicked user
-            $scope.Q5Review = data.Q5.review;
-            $scope.Q5Rating = data.Q5.rating;
 
 
 

@@ -16,7 +16,7 @@
             <tr ng-repeat="cr in Course1 track by $index">
                 <td>{{cr.courseId}}</td>
                 <td>{{cr.courseName}}</td>
-                <td><i class="fa fa-hand-o-right fa-2x" id="{{cr.courseId}} {{cr.courseName}}" ng-click="DisplayForm($event)"></i></td>
+                <td><i class="fa fa-hand-o-right fa-2x hand" id="{{cr.courseId}} {{cr.courseName}}" ng-click="DisplayForm($event)"></i></td>
             </tr>
         </table>
     </div>
@@ -32,18 +32,43 @@
 					</select>
 				</span>
             </tr>
-            <tr ng-repeat="rv in CourseReviews track by $index" id="myBtn" ng-click="ShowDetails(rv)">
+            <tr ng-repeat="rv in CourseReviews track by $index" id="myBtn" ng-click="ShowDetails(rv)" class="reviewsRows" >
                 <td>
                     <span>{{$index+1}}</span>
                     <span class="StudentName"><b>{{rv.name}}</b> <small> {{rv.dateReview}}</small></span>
                     <span class="Term"><small><b>Term :</b>{{rv.term}}</small></span>
-			<span class="fa fa-star fa-1x icon-a" ng-repeat="r in rv.StarRating track by $index" ></span>
+                    <span class="star-icon" ng-repeat="r in getRepeater() track by $index" ng-class="{'full': ($index + 1)
+                <= rv.avgStarRating, 'half': ($index + .5) == rv.avgStarRating}" style="margin-right: 5px;" >{{$index}}</span>
 			<br/>
 			<span class="reviewdata">{{rv.generalReview}}</span>
                 </td>
             </tr>
         </table>
        <!-- <center ng-show="ReviewDiv"><b>Pagination</b></center> -->
+    </div>
+    <div class="col-md-7" ng-show="ReviewQuestion" style="max-height:500px;overflow-y: auto;">
+        <table>
+
+            <tr>
+                <td colspan="3" style="color: #870000"><b>Questions answered by {{name}}</b></td>
+            </tr>
+            <tr>
+                <td>Question</td>
+                <td>Review</td>
+                <td>Rating</td>
+            </tr>
+            <tr ng-repeat="q in Reviews track by $index" >
+                <td><b>{{q.Question}}</b></td>
+                <td>{{q.text}}</td>
+                <td> {{q.rating}}<span class="star-icon" ng-repeat="r in getRepeater() track by $index" ng-class="{'full': ($index + 1)
+                <= q.rating, 'half': ($index + .5) == q.rating}" style="margin-right: 5px;" >{{$index}}</span></td>
+
+                <td></td>
+
+            </tr>
+
+
+        </table>
     </div>
     <div class="col-md-2" ng-show="FilterDiv" >
         <table>
@@ -58,7 +83,7 @@
                 <th> Sentiments</th>
             </tr>
             <tr>
-                <td><ul ng-repeat="st in Sentiments"><option><input type="checkbox" id="{{st}}" style="margin-right: 10%" />{{st}}</option></ul></td>
+                <td><ul ng-repeat="st in Sentiments"><option><input type="checkbox" id="{{st}}"  />{{st}}</option></ul></td>
             </tr>
             <tr>
                 <th>Semesters</th>
