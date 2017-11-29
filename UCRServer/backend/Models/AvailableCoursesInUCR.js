@@ -9,4 +9,4 @@ var availableCourseSchema = new Schema({
 	courseName: {type: String, require: true}
 });
 
-module.exports = mongoose.model('available_courses_in_UCR',availableCourseSchema);
+module.exports = mongoose.model('available_courses_in_UCR', availableCourseSchema);

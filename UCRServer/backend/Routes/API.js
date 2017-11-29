@@ -5,9 +5,9 @@ var Available_courses 			= require('../Models/AvailableCourses');
 var Available_courses_In_UCR 	= require('../Models/AvailableCoursesInUCR');
 var AllOfferedCourse 			= require('../Models/AllCourses');
 var UserDetails 				= require('../Models/userDetails');
-var Course_Reviews 				= require('../Models/courseReview');
+var Course_Reviews 				= require('../Models/review');
 var Question		 			= require('../Models/questions');
-var Question_Schema = require('../Models/questions');
+// var Question_Schema = require('../Models/questions');
 
 module.exports = function( router ) {
 	
@@ -167,16 +167,16 @@ module.exports = function( router ) {
 		var review = new Course_Reviews();
 		if( req.body.courseId == null || req.body.courseId == '' ||
 			req.body.userId == null || req.body.userId == '' ||
-			req.body.review.length == 0
+			req.body.review.length == 0 ||
+			req.body.avgStarRating == null || req.body.avgStarRating == '' || req.body.avgStarRating == undefined ||
+			req.body.generalReview == null || req.body.generalReview == '' || req.body.generalReview == undefined
 		){
-			console.log( req.body.courseId );
-			console.log( req.body.userName );
-			console.log( req.body.review.length );
 			res.json({success: false, message: "Required fields are missing"});
 		}else{
 			console.log( req.body.userName );
-			review.courseId 	= req.body.courseId;
-			review.userId	 	= req.body.userId;
+			review.courseId 		= req.body.courseId;
+			review.userId	 		= req.body.userId;
+			review.avgStarRating	= req.body.avgStarRating;
 			if( req.body.userName == null || req.body.userName == '' || req.body.userName == undefined){
 				review.userName	= "Anonymous";
 			}else{
@@ -188,6 +188,8 @@ module.exports = function( router ) {
 				review.term		= req.body.term;
 			}
 			review.review 		= req.body.review;
+			review.generalReview= req.body.generalReview;
+			
 			review.save( function ( err ) {
 				if( err ) throw err;
 				res.json({success: true, message: "Inserted on review"});

@@ -16,7 +16,7 @@
             <tr ng-repeat="cr in Course1 track by $index">
                 <td>{{cr.courseId}}</td>
                 <td>{{cr.courseName}}</td>
-                <td><i class="fa fa-hand-o-right fa-2x hand" id="{{cr.courseId}} {{cr.courseName}}" ng-click="DisplayForm($event)"></i></td>
+                <td><i class="fa fa-hand-o-right fa-2x hand" id="{{cr.courseId}} {{cr.courseName}}" ng-click="DisplayForm($event,cr.courseId)"></i></td>
             </tr>
         </table>
     </div>
@@ -35,7 +35,7 @@
             <tr ng-repeat="rv in CourseReviews track by $index" id="myBtn" ng-click="ShowDetails(rv)" class="reviewsRows" >
                 <td>
                     <span>{{$index+1}}</span>
-                    <span class="StudentName"><b>{{rv.name}}</b> <small> {{rv.dateReview}}</small></span>
+                    <span class="StudentName"><b>{{rv.userName}}</b> <small> {{rv.dateReview}}</small></span>
                     <span class="Term"><small><b>Term :</b>{{rv.term}}</small></span>
                     <span class="star-icon" ng-repeat="r in getRepeater() track by $index" ng-class="{'full': ($index + 1)
                 <= rv.avgStarRating, 'half': ($index + .5) == rv.avgStarRating}" style="margin-right: 5px;" >{{$index}}</span>
@@ -58,7 +58,7 @@
                 <td>Rating</td>
             </tr>
             <tr ng-repeat="q in Reviews track by $index" >
-                <td><b>{{q.Question}}</b></td>
+                <td><b>{{q.question}}</b></td>
                 <td>{{q.text}}</td>
                 <td> {{q.rating}}<span class="star-icon" ng-repeat="r in getRepeater() track by $index" ng-class="{'full': ($index + 1)
                 <= q.rating, 'half': ($index + .5) == q.rating}" style="margin-right: 5px;" >{{$index}}</span></td>

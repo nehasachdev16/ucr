@@ -9,8 +9,9 @@ var reviewSchema = Schema({
 	userId			: {type: String, require: true},
 	userName		: {type: String, default: 'Anonymous'},
 	term			: {type: String, default: 'Unknown'},
-	review 			: [{questionId: String, rating: String, text: String}],
-	averageRating	: {type: String, require: true}
+	review 			: [{questionId: String, rating: String, text: String, question: String}],
+	avgStarRating	: {type: String, require: true},
+	generalReview	: {type: String, require: true}
 });
 
 module.exports = mongoose.model('reviews', reviewSchema);

@@ -5,3 +5,17 @@
     border: solid 1px;
     padding: 15px;
     }
+
+.starRatingColor1, .starRatingColor2{
+    color: red;
+    }
+
+
+.starRatingColor3{
+    color: #FFCC00;
+    }
+
+
+.starRatingColor4, .starRatingColor5{
+    color: greenyellow;
+    }
